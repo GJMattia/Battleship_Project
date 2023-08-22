@@ -17,8 +17,6 @@ const COMPUTER_TILE_STATES = {
 const ALPHABET_LOOKUP = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
 
 
-
-
 /*----- state variables -----*/
 let startGame = false;
 let humanBoard;
@@ -42,7 +40,9 @@ let humanShips = [
         vertical: false,
         column: 0,
         row: 0,
-        length: 2
+        length: 2,
+        occupiedTiles: [],
+        isSunk: false
     },
 
     {
@@ -50,7 +50,9 @@ let humanShips = [
         vertical: false,
         column: 0,
         row: 0,
-        length: 3
+        length: 3,
+        occupiedTiles: [],
+        isSunk: false
     },
 
     {
@@ -58,21 +60,27 @@ let humanShips = [
         vertical: false,
         column: 0,
         row: 0,
-        length: 3
+        length: 3,
+        occupiedTiles: [],
+        isSunk: false
     },
     {
         name: 'Battleship',
         vertical: false,
         column: 0,
         row: 0,
-        length: 4
+        length: 4,
+        occupiedTiles: [],
+        isSunk: false
     },
     {
         name: 'Carrier',
         vertical: false,
         column: 0,
         row: 0,
-        length: 5
+        length: 5,
+        occupiedTiles: [],
+        isSunk: false
     }
 ];
 
@@ -82,7 +90,9 @@ let computerShips = [
         vertical: false,
         column: 0,
         row: 0,
-        length: 2
+        length: 2,
+        occupiedTiles: [],
+        isSunk: false
     },
 
     {
@@ -90,7 +100,9 @@ let computerShips = [
         vertical: true,
         column: 0,
         row: 0,
-        length: 3
+        length: 3,
+        occupiedTiles: [],
+        isSunk: false
     },
 
     {
@@ -98,21 +110,27 @@ let computerShips = [
         vertical: false,
         column: 0,
         row: 0,
-        length: 3
+        length: 3,
+        occupiedTiles: [],
+        isSunk: false
     },
     {
         name: 'Battleship',
         vertical: false,
         column: 0,
         row: 0,
-        length: 4
+        length: 4,
+        occupiedTiles: [],
+        isSunk: false
     },
     {
         name: 'Carrier',
         vertical: false,
         column: 0,
         row: 0,
-        length: 5
+        length: 5,
+        occupiedTiles: [],
+        isSunk: false
     }
 ];
 
@@ -252,6 +270,8 @@ if (computerBoard[columnIndex][rowIndex] === 2 || computerBoard[columnIndex][row
 }
 computerBoard[columnIndex][rowIndex]+= 2;
 renderComputerBoard();
+checkSunk(humanShips, humanBoard);
+checkWinner(humanShips);
 handleComputerAttack();
 
 };
@@ -276,7 +296,7 @@ do {
 } while (computerAlreadyAttacked.includes(fullCoordinates));
 
 computerAlreadyAttacked.push(fullCoordinates);
-console.log(computerAlreadyAttacked);
+// console.log(computerAlreadyAttacked);
 humanBoard[columnCoordinates][rowCoordinates] += 2;
 
 renderHumanBoard();
@@ -325,6 +345,26 @@ function confirmPlacement(){
 messageBox.innerText = 'Please Select a Ship';
 return;
     };
+
+    maxGridSize = 10;
+
+    possibleColumn = parseInt(columnInput.value);
+    possibleRow = parseInt(rowInput.value);
+
+    if (selectedShip.vertical === false){
+        if (possibleColumn > maxGridSize - selectedShip.length || possibleRow >= maxGridSize){
+            console.log('your ship is out of bounds');
+            return;
+        }
+    };
+    
+    if (selectedShip.vertical === true){
+        if (possibleRow > maxGridSize - selectedShip.length || possibleColumn >= maxGridSize){
+            console.log('your ship is out of bounds');
+            return;
+        }
+    }
+    
     selectedShip.column = parseInt(columnInput.value);
     selectedShip.row = parseInt(rowInput.value);
     addHumanShip(selectedShip);
@@ -347,10 +387,12 @@ function addHumanShip(ship) {
     if (ship.vertical === false) {
         for (let i = 0; i < ship.length; i++) {
             humanBoard[ship.column + i][ship.row]++;
+            ship.occupiedTiles.push(`${ship.column + i}${ship.row}`);
         }
     } else {
         for (let i = 0; i < ship.length; i++) {
             humanBoard[ship.column][ship.row + i]++;
+            ship.occupiedTiles.push(`${ship.column}${ship.row + i}`);
         }
     }
 };
@@ -407,5 +449,38 @@ function toggleShipYard() {
     }
 };
 
+
+function checkSunk(shipsArray, board){
+    
+    shipsArray.forEach(function(ship){
+        let total = 0;
+        ship.occupiedTiles.forEach(function(coordinate){
+            let columnIndex = coordinate[0];
+            let rowIndex = coordinate[1];
+            total += board[columnIndex][rowIndex];
+        });
+        if (ship.isSunk === true){
+            return
+        };
+        if (total === ship.length * 3){
+            console.log(`YOU HAVE SUNK THE ENEMY ${ship.name}`);
+            ship.isSunk = true;
+        };
+
+    });
+};
+
+function checkWinner(array){
+    let count = 0;
+    array.forEach(function(ship){
+    if (ship.isSunk === true){
+        count++
+    }else return;
+    });
+    if (count === 5){
+        console.log('we have a loser')
+    }else 
+    console.log('we dont have a winner yet')
+    };
 
 
