@@ -1,0 +1,322 @@
+html {
+    font-size: 62.5%;
+    background-color: black;
+}
+
+@font-face {
+    font-family: 'Farenheight';
+    src: url('/fonts/FarenheightPersonalUseRegular-9YdJ7.ttf')
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.game-container {
+    width: 120rem;
+    height: 80rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    background-size: cover;
+    border: 4px solid white;
+    background: linear-gradient(to top, #01234e 0%, #1e5580 100%);
+}
+
+.title-box {
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100rem;
+    height: 8rem;
+    background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
+    border-radius: 1rem;
+    box-shadow: 10px 10px 10px black;
+}
+
+.game-title {
+    position: relative;
+    top: .5rem;
+    left: 1.2rem;
+    color: rgb(255, 255, 255);
+    font-family: 'farenheight';
+    font-size: 5.5rem;
+
+}
+
+#humanBoard {
+    position: relative;
+    bottom: 1rem;
+    margin: 4rem;
+    background-color: dodgerblue;
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    width: 50rem;
+    height: 50rem;
+    border: 3px solid black;
+}
+
+
+#humanBoard>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+
+}
+
+#humanBoard>div:hover {
+    cursor: pointer;
+    background-color: lawngreen;
+}
+
+#computerBoard {
+    position: relative;
+    bottom: 1rem;
+    margin: 4rem;
+    background-color: cadetblue;
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    border: 3px solid black;
+    width: 50rem;
+    height: 50rem;
+}
+
+
+#computerBoard>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+#computerBoard>div:hover {
+    cursor: pointer;
+    background-color: red;
+}
+
+
+.message-box {
+    font-family: 'farenheight';
+    color: white;
+    position: relative;
+    bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    width: 110rem;
+    height: 8rem;
+    background-color: #0d0a0b;
+    background-image: linear-gradient(315deg, #0d0a0b 0%, #009fc2 74%);
+    border-radius: 1rem;
+    box-shadow: 10px 10px 10px black;
+}
+
+.ship-selection-box {
+    visibility: visible;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    bottom: 63.6rem;
+    left: 29.3rem;
+    width: 50rem;
+    height: 50rem;
+    background-color: white;
+    border: 3px solid black;
+    background-color: #2a2a72;
+    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+    box-shadow: 10px 10px 10px black;
+    flex-wrap: wrap;
+}
+
+.ship-title {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 1rem;
+    width: 40rem;
+    height: 6rem;
+    border-radius: 1rem;
+    background-color: #fefefe;
+    background-image: linear-gradient(315deg, #fefefe 0%, #00a4e4 74%);
+    box-shadow: 10px 10px 10px black;
+    font-family: 'farenheight';
+    color: white;
+    font-size: 1.5rem;
+    border: 1px solid black;
+
+}
+
+
+.ship-yard {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 21rem;
+    height: 30rem;
+    position: relative;
+    top: 1rem;
+    right: 1rem;
+
+}
+
+.selected-ship {
+    color:white;
+    font-family: 'farenheight';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    position: relative;
+    top: 1.5rem;
+    left:1rem;
+    width: 25rem;
+    height: 23rem;
+    box-shadow: 10px 10px 10px black;
+    border-radius: 1rem;
+    background-color: #2e54c5;
+    background-image: linear-gradient(315deg, #001e7a 0%, #7ddff3 74%);
+
+
+
+}
+
+.ship-yard-controls {
+    position: relative;
+    top: 3rem;
+    font-size: 1.5rem;
+    font-family: 'farenheight';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46rem;
+    height: 6rem;
+    background-color: #fefefe;
+    background-image: linear-gradient(315deg, #fefefe 0%, #00a4e4 74%);
+    box-shadow: 10px 10px 10px black;
+    border-radius: 1rem;
+}
+
+input {
+    margin: 1rem;
+    font-family: Impact;
+    font-size: 3rem;
+    width: 5rem;
+    height: 3rem;
+}
+
+.rotate {
+    margin-left: 3rem;
+    font-size: 1.8rem;
+    font-weight: 900;
+    width: 8rem;
+    height: 3rem;
+    border: 1px solid black;
+    box-shadow: 5px 5px 5px black;
+    border-radius: .5rem;
+
+}
+
+.rotate:hover {
+    cursor: pointer;
+    background-color: rgb(0, 193, 193);
+}
+
+.confirm {
+    font-size: 2rem;
+    font-weight: 900;
+    width: 16rem;
+    height: 4rem;
+    position: relative;
+    bottom: 9rem;
+    left: 12rem;
+    border: 0;
+    border-radius: 1rem;
+}
+
+.confirm:hover {
+    cursor: pointer;
+    background-color: dodgerblue;
+
+}
+
+.ship-frame {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color:white;
+    border: 1px solid rgb(215, 215, 215);
+    background-color: #485461;
+    background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+    box-shadow: 5px 5px 5px black;
+    border-radius: .5rem;
+
+}
+
+.ship-frame:hover {
+    cursor: pointer;
+    background-color: #1d2951;
+    background-image: linear-gradient(315deg, #1d2951 0%, #dbe7fc 74%);
+    
+
+}
+
+.ship0 {
+    width: 6rem;
+    height: 3rem;
+}
+
+.ship1 {
+    width: 12rem;
+    height: 3rem;
+}
+
+.ship2 {
+    width: 12rem;
+    height: 3rem;
+    border-radius: 3rem;
+}
+
+.ship3 {
+    width:  17rem;
+    height: 3rem;
+}
+
+.ship4 {
+    width: 22rem;
+    height: 3rem;
+}
+
+.toggle-ship-yard {
+    position: absolute;
+}
+
+.toggle-ship-yard:hover {
+    cursor: pointer;
+    background-color: blueviolet;
+}
+
+.ship-name{
+    top:1rem;
+    
+    position: absolute;
+}

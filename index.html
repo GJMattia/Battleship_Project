@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script defer src="js/index.js"></script>
+    <title>BATTLESHIP</title>
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="title-box">
+        <h1 class="game-title">BATTLESHIP!</h1>
+      </div>
+      <div id="humanBoard">
+        <div id="c0r0">A1</div>
+        <div id="c1r0">A2</div>
+        <div id="c2r0">A3</div>
+        <div id="c3r0">A4</div>
+        <div id="c4r0">A5</div>
+        <div id="c5r0">A6</div>
+        <div id="c6r0">A7</div>
+        <div id="c7r0">A8</div>
+        <div id="c8r0">A9</div>
+        <div id="c9r0">A10</div>
+
+        <div id="c0r1">B1</div>
+        <div id="c1r1">B2</div>
+        <div id="c2r1">B3</div>
+        <div id="c3r1">B4</div>
+        <div id="c4r1">B5</div>
+        <div id="c5r1">B6</div>
+        <div id="c6r1">B7</div>
+        <div id="c7r1">B8</div>
+        <div id="c8r1">B9</div>
+        <div id="c9r1">B10</div>
+
+        <div id="c0r2">C1</div>
+        <div id="c1r2">C2</div>
+        <div id="c2r2">C3</div>
+        <div id="c3r2">C4</div>
+        <div id="c4r2">C5</div>
+        <div id="c5r2">C6</div>
+        <div id="c6r2">C7</div>
+        <div id="c7r2">C8</div>
+        <div id="c8r2">C9</div>
+        <div id="c9r2">C10</div>
+
+        <div id="c0r3">D1</div>
+        <div id="c1r3">D2</div>
+        <div id="c2r3">D3</div>
+        <div id="c3r3">D4</div>
+        <div id="c4r3">D5</div>
+        <div id="c5r3">D6</div>
+        <div id="c6r3">D7</div>
+        <div id="c7r3">D8</div>
+        <div id="c8r3">D9</div>
+        <div id="c9r3">D10</div>
+
+        <div id="c0r4">E1</div>
+        <div id="c1r4">E2</div>
+        <div id="c2r4">E3</div>
+        <div id="c3r4">E4</div>
+        <div id="c4r4">E5</div>
+        <div id="c5r4">E6</div>
+        <div id="c6r4">E7</div>
+        <div id="c7r4">E8</div>
+        <div id="c8r4">E9</div>
+        <div id="c9r4">E10</div>
+
+        <div id="c0r5">F1</div>
+        <div id="c1r5">F2</div>
+        <div id="c2r5">F3</div>
+        <div id="c3r5">F4</div>
+        <div id="c4r5">F5</div>
+        <div id="c5r5">F6</div>
+        <div id="c6r5">F7</div>
+        <div id="c7r5">F8</div>
+        <div id="c8r5">F9</div>
+        <div id="c9r5">F10</div>
+
+        <div id="c0r6">G1</div>
+        <div id="c1r6">G2</div>
+        <div id="c2r6">G3</div>
+        <div id="c3r6">G4</div>
+        <div id="c4r6">G5</div>
+        <div id="c5r6">G6</div>
+        <div id="c6r6">G7</div>
+        <div id="c7r6">G8</div>
+        <div id="c8r6">G9</div>
+        <div id="c9r6">G10</div>
+
+        <div id="c0r7">H1</div>
+        <div id="c1r7">H2</div>
+        <div id="c2r7">H3</div>
+        <div id="c3r7">H4</div>
+        <div id="c4r7">H5</div>
+        <div id="c5r7">H6</div>
+        <div id="c6r7">H7</div>
+        <div id="c7r7">H8</div>
+        <div id="c8r7">H9</div>
+        <div id="c9r7">H10</div>
+
+        <div id="c0r8">I1</div>
+        <div id="c1r8">I2</div>
+        <div id="c2r8">I3</div>
+        <div id="c3r8">I4</div>
+        <div id="c4r8">I5</div>
+        <div id="c5r8">I6</div>
+        <div id="c6r8">I7</div>
+        <div id="c7r8">I8</div>
+        <div id="c8r8">I9</div>
+        <div id="c9r8">I10</div>
+
+        <div id="c0r9">J1</div>
+        <div id="c1r9">J2</div>
+        <div id="c2r9">J3</div>
+        <div id="c3r9">J4</div>
+        <div id="c4r9">J5</div>
+        <div id="c5r9">J6</div>
+        <div id="c6r9">J7</div>
+        <div id="c7r9">J8</div>
+        <div id="c8r9">J9</div>
+        <div id="c9r9">J10</div>
+      </div>
+
+      <div id="computerBoard">
+        <div id="Cc0r0">A1</div>
+        <div id="Cc1r0">A2</div>
+        <div id="Cc2r0">A3</div>
+        <div id="Cc3r0">A4</div>
+        <div id="Cc4r0">A5</div>
+        <div id="Cc5r0">A6</div>
+        <div id="Cc6r0">A7</div>
+        <div id="Cc7r0">A8</div>
+        <div id="Cc8r0">A9</div>
+        <div id="Cc9r0">A10</div>
+
+        <div id="Cc0r1">B1</div>
+        <div id="Cc1r1">B2</div>
+        <div id="Cc2r1">B3</div>
+        <div id="Cc3r1">B4</div>
+        <div id="Cc4r1">B5</div>
+        <div id="Cc5r1">B6</div>
+        <div id="Cc6r1">B7</div>
+        <div id="Cc7r1">B8</div>
+        <div id="Cc8r1">B9</div>
+        <div id="Cc9r1">B10</div>
+
+        <div id="Cc0r2">C1</div>
+        <div id="Cc1r2">C2</div>
+        <div id="Cc2r2">C3</div>
+        <div id="Cc3r2">C4</div>
+        <div id="Cc4r2">C5</div>
+        <div id="Cc5r2">C6</div>
+        <div id="Cc6r2">C7</div>
+        <div id="Cc7r2">C8</div>
+        <div id="Cc8r2">C9</div>
+        <div id="Cc9r2">C10</div>
+
+        <div id="Cc0r3">D1</div>
+        <div id="Cc1r3">D2</div>
+        <div id="Cc2r3">D3</div>
+        <div id="Cc3r3">D4</div>
+        <div id="Cc4r3">D5</div>
+        <div id="Cc5r3">D6</div>
+        <div id="Cc6r3">D7</div>
+        <div id="Cc7r3">D8</div>
+        <div id="Cc8r3">D9</div>
+        <div id="Cc9r3">D10</div>
+
+        <div id="Cc0r4">E1</div>
+        <div id="Cc1r4">E2</div>
+        <div id="Cc2r4">E3</div>
+        <div id="Cc3r4">E4</div>
+        <div id="Cc4r4">E5</div>
+        <div id="Cc5r4">E6</div>
+        <div id="Cc6r4">E7</div>
+        <div id="Cc7r4">E8</div>
+        <div id="Cc8r4">E9</div>
+        <div id="Cc9r4">E10</div>
+
+        <div id="Cc0r5">F1</div>
+        <div id="Cc1r5">F2</div>
+        <div id="Cc2r5">F3</div>
+        <div id="Cc3r5">F4</div>
+        <div id="Cc4r5">F5</div>
+        <div id="Cc5r5">F6</div>
+        <div id="Cc6r5">F7</div>
+        <div id="Cc7r5">F8</div>
+        <div id="Cc8r5">F9</div>
+        <div id="Cc9r5">F10</div>
+
+        <div id="Cc0r6">G1</div>
+        <div id="Cc1r6">G2</div>
+        <div id="Cc2r6">G3</div>
+        <div id="Cc3r6">G4</div>
+        <div id="Cc4r6">G5</div>
+        <div id="Cc5r6">G6</div>
+        <div id="Cc6r6">G7</div>
+        <div id="Cc7r6">G8</div>
+        <div id="Cc8r6">G9</div>
+        <div id="Cc9r6">G10</div>
+
+        <div id="Cc0r7">H1</div>
+        <div id="Cc1r7">H2</div>
+        <div id="Cc2r7">H3</div>
+        <div id="Cc3r7">H4</div>
+        <div id="Cc4r7">H5</div>
+        <div id="Cc5r7">H6</div>
+        <div id="Cc6r7">H7</div>
+        <div id="Cc7r7">H8</div>
+        <div id="Cc8r7">H9</div>
+        <div id="Cc9r7">H10</div>
+
+        <div id="Cc0r8">I1</div>
+        <div id="Cc1r8">I2</div>
+        <div id="Cc2r8">I3</div>
+        <div id="Cc3r8">I4</div>
+        <div id="Cc4r8">I5</div>
+        <div id="Cc5r8">I6</div>
+        <div id="Cc6r8">I7</div>
+        <div id="Cc7r8">I8</div>
+        <div id="Cc8r8">I9</div>
+        <div id="Cc9r8">I10</div>
+
+        <div id="Cc0r9">J1</div>
+        <div id="Cc1r9">J2</div>
+        <div id="Cc2r9">J3</div>
+        <div id="Cc3r9">J4</div>
+        <div id="Cc4r9">J5</div>
+        <div id="Cc5r9">J6</div>
+        <div id="Cc6r9">J7</div>
+        <div id="Cc7r9">J8</div>
+        <div id="Cc8r9">J9</div>
+        <div id="Cc9r9">J10</div>
+      </div>
+      <div id="messageBox" class="message-box">Welcome to Battleship!</div>
+      <div id="shipsDiv" class="ship-selection-box">
+        <div class="ship-title">
+          <h1>SHIPYARD</h1>
+        </div>
+        <div id="shipYard" class="ship-yard">
+          <div id="ship0" class="ship0 ship-frame">
+            <h1>•</h1>
+            <h1>•</h1>
+          </div>
+          <div id="ship1" class="ship1 ship-frame">
+            <h1>•</h1>
+            <h1>•</h1>
+            <h1>•</h1>
+          </div>
+          <div id="ship2" class="ship2 ship-frame">
+            <h1>•</h1>
+            <h1>•</h1>
+            <h1>•</h1>
+          </div>
+          <div id="ship3" class="ship3 ship-frame">
+            <h1>•</h1>
+            <h1>•</h1>
+            <h1>•</h1>
+            <h1>•</h1>
+          </div>
+          <div id="ship4" class="ship4 ship-frame">
+            <h1>•</h1>
+            <h1>•</h1>
+            <h1>•</h1>
+            <h1>•</h1>
+            <h1>•</h1>
+          </div>
+        </div>
+        <div id="showcaseShip" class="selected-ship">
+          <h1 class="ship-name" id="shipName">SELECT A SHIP!</h1>
+        </div>
+        <div class="ship-yard-controls">
+          <h3>Column</h3>
+          <input id="columnInput" type="number" min="0" max="10" value="0" />
+          <h3>Row</h3>
+          <input id="rowInput" type="number" min="0" max="10" value="0" />
+          <button id="rotateBtn" class="rotate">Rotate</button>
+        </div>
+        <button id="confirm" class="confirm">CONFIRM</button>
+      </div>
+    </div>
+    <button id="toggle" class="toggle-ship-yard">Toggle</button>
+  </body>
+</html>

@@ -354,6 +354,45 @@ function addHumanShip(ship) {
         }
     }
 };
+
+
+
+
+function randomShipPlacement(shipsArray, board) {
+    shipsArray.forEach(function(ship) {
+        ship.vertical = Math.random() < 0.5;
+
+        if (ship.length === 2) {
+            ship.column = Math.floor(Math.random() * 9);
+            ship.row = Math.floor(Math.random() * 9);
+        } else if (ship.length === 3) {
+            ship.column = Math.floor(Math.random() * 8);
+            ship.row = Math.floor(Math.random() * 8);
+        } else if (ship.length === 4) {
+            ship.column = Math.floor(Math.random() * 7);
+            ship.row = Math.floor(Math.random() * 7);
+        } else if (ship.length === 5) {
+            ship.column = Math.floor(Math.random() * 6);
+            ship.row = Math.floor(Math.random() * 6);
+        }
+
+        if (ship.vertical === false) {
+            for (let i = 0; i < ship.length; i++) {
+                board[ship.column + i][ship.row]++;
+            }
+        } else {
+            for (let i = 0; i < ship.length; i++) {
+                board[ship.column][ship.row + i]++;
+            }
+        }
+    });
+
+    renderComputerBoard();
+};
+
+
+
+
 randomShipPlacement(computerShips, computerBoard);
 
 
