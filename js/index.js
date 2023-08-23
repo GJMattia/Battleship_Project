@@ -284,6 +284,10 @@ function renderComputerBoard(){
 };
 
 function handleHumanAttack(event){
+if (turn === '-1' || winner !== null){
+    return;
+};
+
 let selectedDiv = event.target.id;
 
 let columnIndex = selectedDiv[2];
@@ -303,7 +307,8 @@ computerBoard[columnIndex][rowIndex]+= 2;
 renderComputerBoard();
 checkSunk(computerShips, computerBoard);
 checkWinner(computerShips);
-// handleComputerAttack();
+turn *= '-1';
+setTimeout(handleComputerAttack, 1500);
 
 };
 
@@ -311,6 +316,10 @@ checkWinner(computerShips);
 
 
 function handleComputerAttack(){
+
+if (turn === 1 || winner !== null){
+    return;
+};
 
 if (computerAlreadyAttacked.length === 100){
     return;
@@ -329,10 +338,17 @@ do {
 computerAlreadyAttacked.push(fullCoordinates);
 humanBoard[columnCoordinates][rowCoordinates] += 2;
 
+if (humanBoard[columnCoordinates][rowCoordinates] === 2){
+    messageBox.innerHTML = 'THE COMPUTER HAS MISSED! IT IS NOW YOUR TURN!'
+} else if (humanBoard[columnCoordinates][rowCoordinates] === 3){
+    messageBox.innerHTML = 'THE COMPUTER HAS HIT ONE OF YOUR SHIPS! IT IS NOW YOUR TURN!'
+};
+
+
 checkSunk(humanShips, humanBoard);
 checkWinner(humanShips);
 renderHumanBoard();
-
+turn *= '-1';
 };
 
 
@@ -385,14 +401,14 @@ return;
 
     if (selectedShip.vertical === false){
         if (possibleColumn > maxGridSize - selectedShip.length || possibleRow >= maxGridSize){
-            console.log('your ship is out of bounds');
+            messageBox.innerText = 'THE SELECTED SHIP IS OUT OF BOUNDS! PICK ANOTHER SPOT!'
             return;
         }
     };
     
     if (selectedShip.vertical === true){
         if (possibleRow > maxGridSize - selectedShip.length || possibleColumn >= maxGridSize){
-            console.log('your ship is out of bounds');
+            messageBox.innerText = 'THE SELECTED SHIP IS OUT OF BOUNDS! PICK ANOTHER SPOT!';
             return;
         }
     };
@@ -541,7 +557,9 @@ function checkSunk(shipsArray, board){
         if (turn === 1 && total === ship.length * 3){
             messageBox.innerHTML =`YOU HAVE SUNK THE ENEMY ${ship.name}!`;
             ship.isSunk = true;
-        };
+        }else if (turn === '-1' && total === ship.length * 3){
+            messageBox.innerHTML =`THE COMPUTER HAS SUNK YOUR ${ship.name}!`;
+        }
         
     });
 };
@@ -553,9 +571,14 @@ function checkWinner(array){
         count++
     }else return;
     });
-    if (count === 5){
-        console.log('WE HAVE A WINNER')
-    }
+    if (count === 5 && array === computerShips){
+        winner = true;
+        messageBox.innerText = `YOU HAVE SUNK ALL ENEMY SHIPS!!! YOU ARE THE WINNER!!!`
+    }else if (count === 5 && array === humanShips){
+        messageBox.innerText = `THE COMPUTER HAS SUNK ALL OF YOUR SHIPS!!! YOU LOSE!`
+    }else{
+        return;
+    };
     };
 
 
