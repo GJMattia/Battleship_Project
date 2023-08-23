@@ -24,9 +24,12 @@ let computerBoard;
 let selectedShip = null;
 let computerAlreadyAttacked = [];
 let selectedShipDiv = null;
+let possibleCoordinates = [];
+let possibleComputerCoordinates = [];
+let computerCollision = null;
 
 let human = {
-shipsPlaced: 0,
+shipsPlaced: 4,
 
 };
 
@@ -341,7 +344,7 @@ function shipRotate(){
 
 
 function confirmPlacement(){
-    if (selectShip === null){
+    if (selectedShip === null){
 messageBox.innerText = 'Please Select a Ship';
 return;
     };
@@ -363,8 +366,12 @@ return;
             console.log('your ship is out of bounds');
             return;
         }
-    }
-    
+    };
+
+    possibleCoordinates = [];
+generatePossibleCoordinates(possibleColumn, possibleRow, selectedShip.vertical, selectedShip.length);
+
+if (collisionCheck(humanShips, possibleCoordinates) === false){
     selectedShip.column = parseInt(columnInput.value);
     selectedShip.row = parseInt(rowInput.value);
     addHumanShip(selectedShip);
@@ -373,10 +380,59 @@ return;
     showcaseShip.removeChild(selectedShipDiv);
     selectedShipDiv = null;
     human.shipsPlaced++;
-    console.log(selectedShip);
     console.log(human);
     renderControls();
-}
+};
+};
+
+
+function generatePossibleCoordinates(possibleColumn, possibleRow, vertical, length){
+
+    if (vertical === false){
+        for (let i = 0; i < length; i++){
+            possibleCoordinates.push(`${possibleColumn + i}${possibleRow}`);
+        }
+    }else {
+        for (let i = 0; i < length; i++){
+    possibleCoordinates.push(`${possibleColumn}${possibleRow + i}`)
+        }
+    }
+    console.log(possibleCoordinates);
+    
+    };
+
+
+function collisionCheck(ships, possibleCoordinatesArray){
+let collision = false;
+
+    ships.forEach(function(ship){
+        possibleCoordinatesArray.forEach(function(coords){
+            if(ship.occupiedTiles.includes(coords)){
+                console.log('You cannot place your ship here');
+                collision = true;
+            }
+        });
+    });
+    if (collision === true){
+        return true;
+    }else {
+        return false;
+    }
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -402,22 +458,31 @@ function addHumanShip(ship) {
 
 function randomShipPlacement(shipsArray, board) {
     shipsArray.forEach(function(ship) {
-        ship.vertical = Math.random() < 0.5;
+     ship.vertical = Math.random() < 0.5;
 
-        if (ship.length === 2) {
-            ship.column = Math.floor(Math.random() * 9);
-            ship.row = Math.floor(Math.random() * 9);
-        } else if (ship.length === 3) {
-            ship.column = Math.floor(Math.random() * 8);
-            ship.row = Math.floor(Math.random() * 8);
-        } else if (ship.length === 4) {
-            ship.column = Math.floor(Math.random() * 7);
-            ship.row = Math.floor(Math.random() * 7);
-        } else if (ship.length === 5) {
-            ship.column = Math.floor(Math.random() * 6);
-            ship.row = Math.floor(Math.random() * 6);
-        }
-
+            if (ship.length === 2) {
+                ship.column = Math.floor(Math.random() * 9);
+                ship.row = Math.floor(Math.random() * 9);
+            } else if (ship.length === 3) {
+                ship.column = Math.floor(Math.random() * 8);
+                ship.row = Math.floor(Math.random() * 8);
+            } else if (ship.length === 4) {
+                ship.column = Math.floor(Math.random() * 7);
+                ship.row = Math.floor(Math.random() * 7);
+            } else if (ship.length === 5) {
+                ship.column = Math.floor(Math.random() * 6);
+                ship.row = Math.floor(Math.random() * 6);
+            }
+            // if (ship.vertical === false) {
+            //     for (let i = 0; i < ship.length; i++) {
+            //         possibleComputerCoordinates.push(`${ship.column + i}${ship.row}`);
+            //     }
+            // } else {
+            //     for (let i = 0; i < ship.length; i++) {
+            //         possibleComputerCoordinates.push(`${ship.column}${ship.row + i}`);
+            //     }
+            // }
+        // }
         if (ship.vertical === false) {
             for (let i = 0; i < ship.length; i++) {
                 board[ship.column + i][ship.row]++;
@@ -428,9 +493,13 @@ function randomShipPlacement(shipsArray, board) {
             }
         }
     });
-
     renderComputerBoard();
-};
+}
+
+
+
+
+
 
 
 
