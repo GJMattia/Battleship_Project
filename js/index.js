@@ -409,7 +409,8 @@ return;
         if (possibleRow > maxGridSize - selectedShip.length || possibleColumn >= maxGridSize){
             messageBox.innerText = 'THE SELECTED SHIP IS OUT OF BOUNDS! PICK ANOTHER SPOT!';
             return;
-        }
+        };
+        
     };
 
     possibleCoordinates = [];
@@ -428,6 +429,8 @@ if (collisionCheck(humanShips, possibleCoordinates) === false){
     shipsPlaced++;
     renderControls();
     renderMessage();
+    columnInput.value = '0';
+    rowInput.value = '0';
 };
 };
 
