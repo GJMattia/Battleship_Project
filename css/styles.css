@@ -14,11 +14,12 @@ html {
 }
 
 @font-face{
-    font-family: 'ArrayIndex';
+    font-family: 'Arrayindex';
     src: url('/fonts/Arrayindex-Regular.ttf');
 }
 
 body {
+    flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -238,8 +239,9 @@ input {
     width: 5rem;
     height: 3rem;
 }
+
 .row-input{
-    font-family:'ArrayIndex';
+    font-family:'Arrayindex';
 }
 
 .column-input{
@@ -373,6 +375,26 @@ cursor:default;
     position: absolute;
 }
 
+.musicBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:3rem;
+    position: relative;
+    bottom:19rem;
+    width:6rem;
+    height:4rem;
+    background-image: linear-gradient(315deg, #0d0a0b 0%, #00bfff 74%);
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 10px 10px 10px black;
+}
+
+.musicBtn:hover{
+    cursor: pointer;
+    background-image: linear-gradient(315deg, #0d0a0b 0%, #ff0000 74%);
+}
+
 
 
 @media (max-width: 1200px) {
@@ -407,6 +429,11 @@ cursor:default;
     writing-mode:horizontal-tb;
     height:5.5rem;
     width:40rem;
+}
+
+.musicBtn{
+    bottom: 18rem;
+    left:30rem;
 }
 
 }

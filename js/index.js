@@ -12,14 +12,23 @@ const COMPUTER_TILE_STATES = {
   3: 'linear-gradient(326deg, #030202 0%, #91221e 74%)'
 }
 
+/*----- sound constants -----*/
 const miss = new Audio('/sound/miss.mp3');
-const shipSound = new Audio('/sound/ship.mp3');
-const rotateSound = new Audio('/sound/rotate.mp3');
+const shipSound = new Audio('/sound/shipSound.mp3');
+const confirmSound = new Audio('/sound/confirm.mp3');
 const invalid = new Audio('/sound/invalid.mp3');
 const lose = new Audio('/sound/lose.mp3');
 const win = new Audio('/sound/win.mp3');
 const hit = new Audio('/sound/hit.mp3');
-let backgroundMusic = new Audio('/sound/background.mp3');
+const backgroundMusic = new Audio('/sound/background.mp3');
+
+hit.volume = 0.70;
+win.volume = 0.70;
+lose.volume = 0.50;
+invalid.volume = 0.40;
+shipSound.volume = 0.70;
+miss.volume = 0.60;
+backgroundMusic.volume = 0.60;
 
 /*----- state variables -----*/
 let humanBoard;
@@ -31,6 +40,7 @@ let possibleCoordinates = [];
 let winner = null;
 let turn;
 let shipsPlaced;
+let musicOn = false;
 
 
 let humanShips = [{
@@ -149,6 +159,7 @@ const shipName = document.getElementById('shipName');
 const shipsDiv = document.getElementById('shipsDiv');
 const showcaseShip = document.getElementById('showcaseShip');
 const playAgainBtn = document.getElementById('playAgainBtn');
+const musicBtn = document.getElementById('musicBtn');
 
 
 /*----- event listeners -----*/
@@ -161,19 +172,19 @@ confirmBtn.addEventListener('click', confirmPlacement);
 
 rotateBtn.addEventListener('click', shipRotate);
 
-
 computerGrid.forEach(cell => {
   cell.addEventListener('click', handleHumanAttack);
 })
 
 playAgainBtn.addEventListener('click', initalize);
 
+musicBtn.addEventListener('click', playMusic);
 
 
 
 /*----- functions -----*/
 initalize();
-backgroundMusic.play();
+
 
 
 function initalize() {
@@ -221,6 +232,22 @@ function initalize() {
   renderMessage();
 
 };
+
+function playMusic(){
+    if(musicOn === false){
+       musicOn = true;
+       backgroundMusic.play();
+       musicBtn.innerText = '🔈';
+    }else if (musicOn === true){
+        musicOn = false;
+        backgroundMusic.pause();
+        musicBtn.innerText = '🔇';
+    }
+    
+};
+
+
+
 
 function renderMessage() {
   if (shipsPlaced !== 5) {
@@ -316,7 +343,6 @@ function handleHumanAttack(event) {
   checkWinner(computerShips);
   setTimeout(handleComputerAttack, 2000);
   turn = 'computer';
-  console.log(turn);
 };
 
 
@@ -358,7 +384,6 @@ function handleComputerAttack() {
   checkWinner(humanShips);
   renderHumanBoard();
   turn = 'human';
-  console.log(turn);
 };
 
 
@@ -373,7 +398,6 @@ function selectShip(event) {
   selectedShipDiv = event.target;
   shipSound.play();
   showcaseShip.appendChild(selectedShipDiv);
-  console.log(selectedShipDiv);
   selectedShip = humanShips[shipID];
   shipName.innerText = selectedShip.name;
   shipName.style.left = '';
@@ -381,6 +405,11 @@ function selectShip(event) {
 
 
 function shipRotate() {
+  if (selectedShip === null){
+      messageBox.innerHTML = 'PLEASE SELECT A SHIP!'
+      invalid.play();
+      return;
+  }
   if (selectedShip.name === 'CARRIER') {
       shipName.style.left = '1rem';
   } else {
@@ -389,10 +418,10 @@ function shipRotate() {
   selectedShip.vertical = !selectedShip.vertical;
   if (selectedShip.vertical === true) {
       selectedShipDiv.style.transform = 'rotate(90deg)'
-      rotateSound.play();
+      shipSound.play();
   } else {
       selectedShipDiv.style.transform = 'rotate(0deg)';
-      rotateSound.play();
+      shipSound.play();
   };
 };
 
@@ -430,7 +459,7 @@ function confirmPlacement() {
   generatePossibleCoordinates(possibleColumn, possibleRow, selectedShip.vertical, selectedShip.length, possibleCoordinates);
 
   if (collisionCheck(humanShips, possibleCoordinates) === false) {
-      shipSound.play();
+      confirmSound.play();
       selectedShip.column = parseInt(columnInput.value);
       selectedShip.row = parseInt(rowInput.value);
       addHumanShip(selectedShip);
