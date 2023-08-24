@@ -2,16 +2,16 @@
 
 const HUMAN_TILE_STATES = {
     0: '',
-    1: 'darkgray',
-    2: 'white',
-    3: 'darkred'
+    1: 'linear-gradient(315deg, #485461 0%, #28313b 74%)',
+    2: 'linear-gradient(315deg, #ffffff 0%, #87fffb 74%)',
+    3: 'linear-gradient(326deg, #030202 0%, #91221e 74%)'
 };
 
 const COMPUTER_TILE_STATES = {
     0: '',
-    1: 'darkgray',
-    2: 'white',
-    3: 'darkred'
+    1: 'linear-gradient(315deg, #485461 0%, #28313b 74%)',
+    2: 'linear-gradient(315deg, #ffffff 0%, #87fffb 74%)',
+    3: 'linear-gradient(326deg, #030202 0%, #91221e 74%)'
 }
 
 const ALPHABET_LOOKUP = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
@@ -61,7 +61,7 @@ let humanShips = [
         isSunk: false
     },
     {
-        name: 'Battleship',
+        name: 'BATTLESHIP',
         vertical: false,
         column: 0,
         row: 0,
@@ -79,6 +79,7 @@ let humanShips = [
         isSunk: false
     }
 ];
+
 
 let computerShips = [
     {
@@ -219,6 +220,7 @@ humanBoard =
         winner = null;
         turn = 1;
         initalizeShipYard(shipYard);
+        shipDisplayReset(shipYard);
         clearShipsProperties(humanShips);
         clearShipsProperties(computerShips);
         renderHumanBoard();
@@ -230,7 +232,7 @@ humanBoard =
 
 function renderMessage(){
 if (shipsPlaced !== 5){
-    messageBox.innerText = `Please add your ships to the board! You have ${shipsPlaced}/5 ships placed!`;
+    messageBox.innerText = `PLEASE ADD YOUR SHIPS TO THE BOARD! YOU HAVE ${shipsPlaced}/5 SHIPS PLACED`;
 }
 
 if (shipsPlaced === 5 && turn === 1){
@@ -240,6 +242,13 @@ messageBox.innerText = `IT IS YOUR TURN, PLEASE PICK A SPOT TO ATTACK!`
 
 }
 
+
+function shipDisplayReset(shipsDivs){
+shipsDivs.forEach(function(ship){
+ship.style.transform = 'rotate(0deg)';
+})
+shipName.style.left = '';
+}
 
 function clearShipsProperties(shipsArray){
 shipsArray.forEach(function(ship){
@@ -270,7 +279,7 @@ function renderHumanBoard() {
         columnArray.forEach(function (cellValue, rowIndex) {
             const cellId = `c${columnIndex}r${rowIndex}`;
             const cellElement = document.getElementById(cellId);
-            cellElement.style.backgroundColor = HUMAN_TILE_STATES[cellValue];
+            cellElement.style.backgroundImage = HUMAN_TILE_STATES[cellValue];
         })
     })
 };
@@ -281,7 +290,7 @@ function renderComputerBoard(){
         columnArray.forEach(function (cellValue, rowIndex) {
             const cellId = `Cc${columnIndex}r${rowIndex}`;
             const cellElement = document.getElementById(cellId);
-            cellElement.style.backgroundColor = COMPUTER_TILE_STATES[cellValue];
+            cellElement.style.backgroundImage = COMPUTER_TILE_STATES[cellValue];
         })
     })
 
@@ -367,16 +376,22 @@ function selectShip(event) {
     }
     let shipID = event.target.id.charAt(4);
     selectedShipDiv = event.target;
+    
+    
 showcaseShip.appendChild(selectedShipDiv);
 console.log(selectedShipDiv);
     selectedShip = humanShips[shipID];
     shipName.innerText = selectedShip.name;
-    console.log(selectedShip);
-    
+    shipName.style.left = '';
 };
 
 
 function shipRotate(){
+    if(selectedShip.name === 'CARRIER'){
+        shipName.style.left = '1rem';
+    }else {
+        shipName.style.left = '';
+    }
     selectedShip.vertical = !selectedShip.vertical;
     if (selectedShip.vertical === true){
     selectedShipDiv.style.transform = 'rotate(90deg)'}
@@ -390,7 +405,7 @@ function shipRotate(){
 
 function confirmPlacement(){
     if (selectedShip === null){
-messageBox.innerText = 'Please Select a Ship';
+messageBox.innerText = 'PLEASE SELECT A SHIP';
 return;
     };
 
@@ -463,7 +478,7 @@ let collision = false;
     ships.forEach(function(ship){
         possibleCoordinatesArray.forEach(function(coords){
             if(ship.occupiedTiles.includes(coords)){
-            messageBox.innerHTML = 'There is already a ship placed here! Pick another spot!';
+            messageBox.innerHTML = 'THERE IS ALREADY A SHIP PLACED HERE! PICK ANOTHER SPOT!';
                 collision = true;
             }
         });

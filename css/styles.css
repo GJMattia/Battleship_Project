@@ -8,6 +8,16 @@ html {
     src: url('/fonts/FarenheightPersonalUseRegular-9YdJ7.ttf')
 }
 
+@font-face{
+    font-family: 'Numberstoletters';
+    src: url('/fonts/Numberstoletters-Regular.ttf');
+}
+
+@font-face{
+    font-family: 'ArrayIndex';
+    src: url('/fonts/Arrayindex-Regular.ttf');
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -51,6 +61,8 @@ body {
 }
 
 #humanBoard {
+    font-family: 'Trebuchet MS';
+    font-size:1.5rem;
     position: relative;
     bottom: 1rem;
     margin: 4rem;
@@ -82,6 +94,8 @@ body {
 }
 
 #computerBoard {
+    font-family: 'Trebuchet MS';
+    font-size:1.5rem;
     position: relative;
     bottom: 1rem;
     margin: 4rem;
@@ -153,14 +167,14 @@ background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
     align-items: center;
     margin: 1rem;
     width: 40rem;
-    height: 6rem;
+    height: 5rem;
     border-radius: 1rem;
     background-color: #fefefe;
     background-image: linear-gradient(315deg, #fefefe 0%, #00a4e4 74%);
     box-shadow: 10px 10px 10px black;
     font-family: 'Trebuchet MS';
     color: white;
-    font-size: 2rem;
+    font-size: 1.75rem;
     border: 1px solid black;
 
 }
@@ -189,10 +203,9 @@ background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
     flex-wrap: wrap;
     flex-direction: column;
     position: relative;
-    top: 1.5rem;
     left:1rem;
-    width: 25rem;
-    height: 23rem;
+    width: 24rem;
+    height: 25.5rem;
     box-shadow: 10px 10px 10px black;
     border-radius: 1rem;
     background-color: #2e54c5;
@@ -224,6 +237,17 @@ input {
     font-size: 3rem;
     width: 5rem;
     height: 3rem;
+}
+.row-input{
+    font-family:'ArrayIndex';
+}
+
+.column-input{
+    font-family: 'Numberstoletters';
+}
+
+input:hover{
+cursor:default;
 }
 
 .rotate {
@@ -265,7 +289,6 @@ input {
 .confirm:hover {
     cursor: pointer;
     background-image: linear-gradient(315deg, #000000 0%, #21db00 74%);
-
 }
 
 .ship-frame {
@@ -297,17 +320,20 @@ input {
 .ship1 {
     width: 12rem;
     height: 3rem;
+    border-radius: 3rem;
 }
 
 .ship2 {
     width: 12rem;
     height: 3rem;
-    border-radius: 3rem;
+    border-radius: 1rem;
+    
 }
 
 .ship3 {
     width:  17rem;
     height: 3rem;
+    border-radius: 1rem;
 }
 
 .ship4 {
@@ -337,10 +363,11 @@ input {
 .play-again-btn:hover {
     cursor: pointer;
     background-image: linear-gradient(315deg, #000000 0%, #21db00 74%);
+   
 }
 
 .ship-name{
-    font-size:2.5em;
-    top:0rem;
+    font-size:2rem;
+    top:-0.5rem;
     position: absolute;
 }
