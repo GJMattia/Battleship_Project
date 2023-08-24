@@ -372,3 +372,31 @@ cursor:default;
     top:-0.5rem;
     position: absolute;
 }
+
+
+
+@media (max-width: 1200px) {
+
+.game-container {
+    width: 80rem;
+    height: 138rem;
+}
+
+.ship-selection-box{
+    left:0rem;
+}
+
+.message-box{
+    width: 70rem;
+    font-size:2rem;
+}
+
+.play-again-btn{
+    bottom:17.5rem;
+    writing-mode:horizontal-tb;
+    height:5.5rem;
+    width:40rem;
+}
+
+}
+
