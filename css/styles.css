@@ -382,8 +382,19 @@ cursor:default;
     height: 138rem;
 }
 
+#humanBoard{
+    bottom:59rem;
+    order: 1;
+}
+
+
+.message-box{
+    top:57rem;
+}
+
 .ship-selection-box{
-    left:0rem;
+ left:0rem;
+ bottom:63.5rem;
 }
 
 .message-box{
