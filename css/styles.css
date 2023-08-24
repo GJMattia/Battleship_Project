@@ -54,7 +54,8 @@ body {
     position: relative;
     bottom: 1rem;
     margin: 4rem;
-    background-color: dodgerblue;
+    background-color: #03e5b7;
+    background-image: linear-gradient(315deg, #03e5b7 0%, #037ade 74%);
     color: white;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -77,14 +78,15 @@ body {
 
 #humanBoard>div:hover {
     cursor: pointer;
-    background-color: lawngreen;
+    background-image: linear-gradient(315deg, #000000 0%, #21db00 74%);
 }
 
 #computerBoard {
     position: relative;
     bottom: 1rem;
     margin: 4rem;
-    background-color: cadetblue;
+    background-color: #7fcec5;
+background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
     color: white;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
@@ -106,7 +108,7 @@ body {
 
 #computerBoard>div:hover {
     cursor: pointer;
-    background-color: red;
+    background-image: linear-gradient(315deg, #000000 0%, #db0000 74%);
 }
 
 
@@ -148,7 +150,7 @@ body {
 .ship-title {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     margin: 1rem;
     width: 40rem;
     height: 6rem;
@@ -156,9 +158,9 @@ body {
     background-color: #fefefe;
     background-image: linear-gradient(315deg, #fefefe 0%, #00a4e4 74%);
     box-shadow: 10px 10px 10px black;
-    font-family: 'farenheight';
+    font-family: 'Trebuchet MS';
     color: white;
-    font-size: 1.5rem;
+    font-size: 2rem;
     border: 1px solid black;
 
 }
@@ -180,7 +182,7 @@ body {
 
 .selected-ship {
     color:white;
-    font-family: 'farenheight';
+    font-family: 'Trebuchet MS';
     display: flex;
     justify-content: center;
     align-items: center;
@@ -203,8 +205,8 @@ body {
 .ship-yard-controls {
     position: relative;
     top: 3rem;
-    font-size: 1.5rem;
-    font-family: 'farenheight';
+    font-size: 2rem;
+    font-family: impact;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,7 +232,9 @@ input {
     font-weight: 900;
     width: 8rem;
     height: 3rem;
-    border: 1px solid black;
+    border: 0;
+    background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
+    color:white;
     box-shadow: 5px 5px 5px black;
     border-radius: .5rem;
 
@@ -238,24 +242,29 @@ input {
 
 .rotate:hover {
     cursor: pointer;
-    background-color: rgb(0, 193, 193);
+    background-image: linear-gradient(315deg, #000000 0%, #21db00 74%);
 }
 
 .confirm {
-    font-size: 2rem;
+    font-family: 'Trebuchet MS';
+    font-size: 2.5rem;
     font-weight: 900;
     width: 16rem;
     height: 4rem;
     position: relative;
-    bottom: 9rem;
+    bottom: 10rem;
     left: 12rem;
     border: 0;
     border-radius: 1rem;
+    background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
+    color:white;
+    box-shadow: 5px 5px 5px black;
+    border-radius: .5rem;
 }
 
 .confirm:hover {
     cursor: pointer;
-    background-color: dodgerblue;
+    background-image: linear-gradient(315deg, #000000 0%, #21db00 74%);
 
 }
 
@@ -306,17 +315,32 @@ input {
     height: 3rem;
 }
 
-.toggle-ship-yard {
+.play-again-btn {
+    visibility: hidden;
+    font-family: 'Trebuchet MS';
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    height:40rem;
+    width:5.5rem;
     position: absolute;
+    background-color: #0d0a0b;
+    background-image: linear-gradient(315deg, #0d0a0b 0%, #5ccbd5 74%);
+    border-radius: 1rem;
+    box-shadow: 10px 10px 10px black;
 }
 
-.toggle-ship-yard:hover {
+.play-again-btn:hover {
     cursor: pointer;
-    background-color: blueviolet;
+    background-image: linear-gradient(315deg, #000000 0%, #21db00 74%);
 }
 
 .ship-name{
-    top:1rem;
-    
+    font-size:2.5em;
+    top:0rem;
     position: absolute;
 }

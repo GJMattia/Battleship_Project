@@ -26,19 +26,8 @@ let selectedShipDiv = null;
 let possibleCoordinates = [];
 let winner = null;
 let turn = 1;
+let shipsPlaced;
 
-
-
-
-
-
-let human = {
-shipsPlaced: 0,
-
-};
-
-let computer = {
-};
 
 
 let humanShips = [
@@ -151,6 +140,7 @@ const humanGrid = [...document.querySelectorAll('#humanBoard > div')];
 const computerGrid = [...document.querySelectorAll('#computerBoard > div')];
 const messageBox = document.getElementById('messageBox');
 const shipYard = [...document.querySelectorAll('#shipYard > div')];
+const shipYardDiv = document.getElementById('shipYard');
 
 const columnInput = document.getElementById('columnInput');
 const rowInput = document.getElementById('rowInput');
@@ -159,9 +149,8 @@ const confirmBtn = document.getElementById('confirm');
 const shipName = document.getElementById('shipName');
 const shipsDiv = document.getElementById('shipsDiv');
 const showcaseShip = document.getElementById('showcaseShip');
+const playAgainBtn = document.getElementById('playAgainBtn');
 
-
-let toggle = document.getElementById('toggle');
 
 
 
@@ -181,13 +170,11 @@ confirmBtn.addEventListener('click', confirmPlacement);
 rotateBtn.addEventListener('click', shipRotate);
 
 
-toggle.addEventListener('click', handleComputerAttack);
-
 computerGrid.forEach(cell =>{
     cell.addEventListener('click', handleHumanAttack);
 })
 
-
+playAgainBtn.addEventListener('click', initalize);
 
 
 
@@ -226,18 +213,27 @@ humanBoard =
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  // col 9
         ];
 
+        shipsPlaced = 0;
+        shipsDiv.style.visibility = 'visible';
+        playAgainBtn.style.visibility = 'hidden';
+        winner = null;
+        turn = 1;
+        initalizeShipYard(shipYard);
+        clearShipsProperties(humanShips);
+        clearShipsProperties(computerShips);
         renderHumanBoard();
+        randomShipPlacement(computerShips, computerBoard);
         renderComputerBoard();
         renderMessage();
 
 };
 
 function renderMessage(){
-if (human.shipsPlaced !== 5){
-    messageBox.innerText = `Please add your ships to the board! You have ${human.shipsPlaced}/5 ships placed!`;
+if (shipsPlaced !== 5){
+    messageBox.innerText = `Please add your ships to the board! You have ${shipsPlaced}/5 ships placed!`;
 }
 
-if (human.shipsPlaced === 5 && turn === 1){
+if (shipsPlaced === 5 && turn === 1){
 messageBox.innerText = `IT IS YOUR TURN, PLEASE PICK A SPOT TO ATTACK!`
 }
 
@@ -245,12 +241,20 @@ messageBox.innerText = `IT IS YOUR TURN, PLEASE PICK A SPOT TO ATTACK!`
 }
 
 
-
+function clearShipsProperties(shipsArray){
+shipsArray.forEach(function(ship){
+ship.isSunk = false;
+ship.occupiedTiles = [];
+ship.column = null;
+ship.row = null;
+ship.vertical = false;
+})
+};
 
 
 
 function renderControls(){
-if (human.shipsPlaced !== 5){
+if (shipsPlaced !== 5){
     return;
 }else
 shipsDiv.style.visibility = 'hidden';
@@ -308,7 +312,7 @@ renderComputerBoard();
 checkSunk(computerShips, computerBoard);
 checkWinner(computerShips);
 turn *= '-1';
-setTimeout(handleComputerAttack, 1500);
+setTimeout(handleComputerAttack, 150);
 
 };
 
@@ -375,13 +379,9 @@ console.log(selectedShipDiv);
 function shipRotate(){
     selectedShip.vertical = !selectedShip.vertical;
     if (selectedShip.vertical === true){
-        shipName.style.top = '10rem';
-        shipName.style.left = '1rem';
     selectedShipDiv.style.transform = 'rotate(90deg)'}
     else {
     selectedShipDiv.style.transform = 'rotate(0deg)';
-    shipName.style.top = '1rem';
-    shipName.style.removeProperty('left');
     };
 };
 
@@ -422,13 +422,23 @@ if (collisionCheck(humanShips, possibleCoordinates) === false){
     addHumanShip(selectedShip);
     renderHumanBoard();
     selectedShip = null;
-    showcaseShip.removeChild(selectedShipDiv);
+    shipYardDiv.appendChild(selectedShipDiv);
+    selectedShipDiv.style.visibility = 'hidden';
+    selectedShipDiv.style.position = 'absolute';
     selectedShipDiv = null;
-    human.shipsPlaced++;
+    shipsPlaced++;
     renderControls();
     renderMessage();
 };
 };
+
+function initalizeShipYard(shipYard){
+    shipYard.forEach(function(ship){
+    ship.style.visibility = 'visible';
+    ship.style.position = '';
+    });
+};
+
 
 
 function generatePossibleCoordinates(possibleColumn, possibleRow, vertical, length, possibleCoordinatesArray){
@@ -518,22 +528,6 @@ function randomShipPlacement(shipsArray, board) {
             }
         }
     });
-    renderComputerBoard();
-}
-
-
-randomShipPlacement(computerShips, computerBoard);
-
-
-
-
-
-function toggleShipYard() {
-    if (shipsDiv.style.visibility === 'hidden') {
-        shipsDiv.style.visibility = 'visible';
-    } else {
-        shipsDiv.style.visibility = 'hidden';
-    }
 };
 
 
@@ -574,11 +568,18 @@ function checkWinner(array){
     if (count === 5 && array === computerShips){
         winner = true;
         messageBox.innerText = `YOU HAVE SUNK ALL ENEMY SHIPS!!! YOU ARE THE WINNER!!!`
+        playAgainBtn.style.visibility = 'visible';
     }else if (count === 5 && array === humanShips){
         messageBox.innerText = `THE COMPUTER HAS SUNK ALL OF YOUR SHIPS!!! YOU LOSE!`
+        playAgainBtn.style.visibility = 'visible';
     }else{
         return;
     };
     };
+
+
+
+
+
 
 
