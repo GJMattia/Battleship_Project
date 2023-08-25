@@ -42,7 +42,6 @@ let turn;
 let shipsPlaced;
 let musicOn = false;
 
-
 let humanShips = [{
       name: 'DESTROYER',
       vertical: false,
@@ -91,7 +90,6 @@ let humanShips = [{
       isSunk: false
   }
 ];
-
 
 let computerShips = [{
       name: 'DESTROYER',
@@ -142,9 +140,7 @@ let computerShips = [{
   }
 ];
 
-
 /*----- cached elements  -----*/
-
 const humanGrid = [...document.querySelectorAll('#humanBoard > div')];
 const computerGrid = [...document.querySelectorAll('#computerBoard > div')];
 const messageBox = document.getElementById('messageBox');
@@ -161,31 +157,20 @@ const showcaseShip = document.getElementById('showcaseShip');
 const playAgainBtn = document.getElementById('playAgainBtn');
 const musicBtn = document.getElementById('musicBtn');
 
-
 /*----- event listeners -----*/
-
 shipYard.forEach(ship => {
   ship.addEventListener('click', selectShip);
 });
-
-confirmBtn.addEventListener('click', confirmPlacement);
-
-rotateBtn.addEventListener('click', shipRotate);
-
 computerGrid.forEach(cell => {
   cell.addEventListener('click', handleHumanAttack);
-})
-
+});
+confirmBtn.addEventListener('click', confirmPlacement);
+rotateBtn.addEventListener('click', shipRotate);
 playAgainBtn.addEventListener('click', initalize);
-
 musicBtn.addEventListener('click', playMusic);
-
-
 
 /*----- functions -----*/
 initalize();
-
-
 
 function initalize() {
 
@@ -201,7 +186,6 @@ function initalize() {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // col 8
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] // col 9
   ];
-
   computerBoard = [
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // col 0
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // col 1
@@ -214,7 +198,6 @@ function initalize() {
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // col 8
       [0, 0, 0, 0, 0, 0, 0, 0, 0, 0] // col 9
   ];
-  
   shipsPlaced = 0;
   computerAlreadyAttacked = [];
   shipsDiv.style.visibility = 'visible';
@@ -230,7 +213,6 @@ function initalize() {
   randomShipPlacement(computerShips, computerBoard);
   renderComputerBoard();
   renderMessage();
-
 };
 
 function playMusic(){
@@ -243,11 +225,7 @@ function playMusic(){
         backgroundMusic.pause();
         musicBtn.innerText = '🔇';
     }
-    
 };
-
-
-
 
 function renderMessage() {
   if (shipsPlaced !== 5) {
@@ -255,19 +233,16 @@ function renderMessage() {
   }
 
   if (shipsPlaced === 5 && turn === 'human') {
-      messageBox.innerText = `IT IS YOUR TURN, PLEASE PICK A SPOT TO ATTACK!`
+      messageBox.innerText = `IT IS YOUR TURN, PLEASE PICK A SPOT TO ATTACK!`;
   }
-
-
-}
-
+};
 
 function shipDisplayReset(shipsDivs) {
   shipsDivs.forEach(function(ship) {
       ship.style.transform = 'rotate(0deg)';
   })
   shipName.style.left = '';
-}
+};
 
 function clearShipsProperties(shipsArray) {
   shipsArray.forEach(function(ship) {
@@ -279,39 +254,31 @@ function clearShipsProperties(shipsArray) {
   })
 };
 
-
-
 function renderControls() {
   if (shipsPlaced !== 5) {
       return;
   } else
       shipsDiv.style.visibility = 'hidden';
-
-
 };
 
-
 function renderHumanBoard() {
-
   humanBoard.forEach(function(columnArray, columnIndex) {
       columnArray.forEach(function(cellValue, rowIndex) {
           const cellId = `c${columnIndex}r${rowIndex}`;
           const cellElement = document.getElementById(cellId);
           cellElement.style.backgroundImage = HUMAN_TILE_STATES[cellValue];
-      })
-  })
+      });
+  });
 };
 
 function renderComputerBoard() {
-
   computerBoard.forEach(function(columnArray, columnIndex) {
       columnArray.forEach(function(cellValue, rowIndex) {
           const cellId = `Cc${columnIndex}r${rowIndex}`;
           const cellElement = document.getElementById(cellId);
           cellElement.style.backgroundImage = COMPUTER_TILE_STATES[cellValue];
-      })
-  })
-
+      });
+  });
 };
 
 function handleHumanAttack(event) {
@@ -320,7 +287,6 @@ function handleHumanAttack(event) {
   };
 
   let selectedDiv = event.target.id;
-
   let columnIndex = selectedDiv[2];
   let rowIndex = selectedDiv[4];
 
@@ -328,7 +294,7 @@ function handleHumanAttack(event) {
       messageBox.innerHTML = 'YOU ALREADY ATTACKED THIS SPOT, PLEASE PICK ANOTHER!'
       invalid.play();
       return;
-  }
+  };
 
   if (computerBoard[columnIndex][rowIndex] === 1) {
       hit.play();
@@ -336,7 +302,7 @@ function handleHumanAttack(event) {
   } else if (computerBoard[columnIndex][rowIndex] === 0) {
       miss.play();
       messageBox.innerHTML = 'MISS! BETTER LUCK NEXT TURN!'
-  }
+  };
   computerBoard[columnIndex][rowIndex] += 2;
   renderComputerBoard();
   checkSunk(computerShips, computerBoard);
@@ -345,11 +311,7 @@ function handleHumanAttack(event) {
   turn = 'computer';
 };
 
-
-
-
 function handleComputerAttack() {
-
   if (turn === 'human' || winner !== null) {
       return;
   };
@@ -367,25 +329,21 @@ function handleComputerAttack() {
       rowCoordinates = Math.floor(Math.random() * 10);
       fullCoordinates = `${columnCoordinates}${rowCoordinates}`;
   } while (computerAlreadyAttacked.includes(fullCoordinates));
-
   computerAlreadyAttacked.push(fullCoordinates);
   humanBoard[columnCoordinates][rowCoordinates] += 2;
 
   if (humanBoard[columnCoordinates][rowCoordinates] === 2) {
       miss.play();
-      messageBox.innerHTML = 'THE COMPUTER HAS MISSED! IT IS NOW YOUR TURN!'
+      messageBox.innerHTML = 'THE COMPUTER HAS MISSED! IT IS NOW YOUR TURN!';
   } else if (humanBoard[columnCoordinates][rowCoordinates] === 3) {
       hit.play();
-      messageBox.innerHTML = 'THE COMPUTER HAS HIT ONE OF YOUR SHIPS! IT IS NOW YOUR TURN!'
+      messageBox.innerHTML = 'THE COMPUTER HAS HIT ONE OF YOUR SHIPS! IT IS NOW YOUR TURN!';
   };
-
-
   checkSunk(humanShips, humanBoard);
   checkWinner(humanShips);
   renderHumanBoard();
   turn = 'human';
 };
-
 
 function selectShip(event) {
   if (event.target.tagName === 'H1') {
@@ -393,7 +351,7 @@ function selectShip(event) {
   };
   if (showcaseShip.children.length > 1) {
       return;
-  }
+  };
   let shipID = event.target.id.charAt(4);
   selectedShipDiv = event.target;
   shipSound.play();
@@ -434,7 +392,6 @@ function confirmPlacement() {
   };
 
   maxGridSize = 10;
-
   possibleColumn = parseInt(columnInput.value);
   possibleRow = parseInt(rowInput.value);
 
@@ -452,9 +409,7 @@ function confirmPlacement() {
           invalid.play();
           return;
       };
-
   };
-
   possibleCoordinates = [];
   generatePossibleCoordinates(possibleColumn, possibleRow, selectedShip.vertical, selectedShip.length, possibleCoordinates);
 
@@ -484,18 +439,16 @@ function initalizeShipYard(shipYard) {
   });
 };
 
-
 function generatePossibleCoordinates(possibleColumn, possibleRow, vertical, length, possibleCoordinatesArray) {
-
   if (vertical === false) {
       for (let i = 0; i < length; i++) {
           possibleCoordinatesArray.push(`${possibleColumn + i}${possibleRow}`);
-      }
+      };
   } else {
       for (let i = 0; i < length; i++) {
           possibleCoordinatesArray.push(`${possibleColumn}${possibleRow + i}`)
-      }
-  }
+      };
+  };
 
 };
 
@@ -516,7 +469,7 @@ function collisionCheck(ships, possibleCoordinatesArray) {
       return true;
   } else {
       return false;
-  }
+  };
 };
 
 
@@ -526,13 +479,13 @@ function addHumanShip(ship) {
       for (let i = 0; i < ship.length; i++) {
           humanBoard[ship.column + i][ship.row]++;
           ship.occupiedTiles.push(`${ship.column + i}${ship.row}`);
-      }
+      };
   } else {
       for (let i = 0; i < ship.length; i++) {
           humanBoard[ship.column][ship.row + i]++;
           ship.occupiedTiles.push(`${ship.column}${ship.row + i}`);
-      }
-  }
+      };
+  };
 };
 
 
@@ -558,7 +511,6 @@ function randomShipPlacement(shipsArray, board) {
           ship.row = Math.floor(Math.random() * 2);
       }
 
-
       if (ship.vertical === false) {
           for (let i = 0; i < ship.length; i++) {
               board[ship.column + i][ship.row]++;
@@ -568,39 +520,34 @@ function randomShipPlacement(shipsArray, board) {
           for (let i = 0; i < ship.length; i++) {
               board[ship.column][ship.row + i]++;
               ship.occupiedTiles.push(`${ship.column }${ship.row + i}`);
-          }
-      }
+          };
+      };
   });
 };
 
 
 function checkSunk(shipsArray, board) {
-
   shipsArray.forEach(function(ship) {
       let total = 0;
       ship.occupiedTiles.forEach(function(coordinate) {
           let columnIndex = coordinate[0];
           let rowIndex = coordinate[1];
-
           total += board[columnIndex][rowIndex];
-
-
       });
+
       if (ship.isSunk === true) {
           return;
       };
+
       if (turn === 'human' && total === ship.length * 3) {
           messageBox.innerHTML = `YOU HAVE SUNK THE ENEMY ${ship.name}!`;
           ship.isSunk = true;
       } else if (turn === 'computer' && total === ship.length * 3) {
           messageBox.innerHTML = `THE COMPUTER HAS SUNK YOUR ${ship.name}!`;
           ship.isSunk = true;
-      }
-
+      };
   });
 };
-
-checkSunk(computerShips, computerBoard);
 
 function checkWinner(array) {
   let count = 0;
@@ -609,6 +556,7 @@ function checkWinner(array) {
           count++
       } else return;
   });
+  
   if (count === 5 && array === computerShips) {
       winner = true;
       messageBox.innerText = `YOU HAVE SUNK ALL ENEMY SHIPS!!! YOU ARE THE WINNER!!!`
