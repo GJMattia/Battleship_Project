@@ -5,17 +5,17 @@ html{
 
 @font-face{
     font-family: 'Farenheight';
-    src: url('./fonts/FarenheightPersonalUseRegular-9YdJ7.ttf')
+    src: url('../fonts/FarenheightPersonalUseRegular-9YdJ7.ttf')
 }
 
 @font-face{
     font-family: 'Numberstoletters';
-    src: url('./fonts/Numberstoletters-Regular.ttf');
+    src: url('../fonts/Numberstoletters-Regular.ttf');
 }
 
 @font-face{
     font-family: 'Arrayindex';
-    src: url('./fonts/Arrayindex-Regular.ttf');
+    src: url('../fonts/Arrayindex-Regular.ttf');
 }
 
 body{
