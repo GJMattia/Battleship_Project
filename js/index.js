@@ -13,14 +13,14 @@ const COMPUTER_TILE_STATES = {
 }
 
 /*----- sound constants -----*/
-const miss = new Audio('../sound/miss.mp3');
-const shipSound = new Audio('../sound/shipSound.mp3');
-const confirmSound = new Audio('../sound/confirm.mp3');
-const invalid = new Audio('../sound/invalid.mp3');
-const lose = new Audio('../sound/lose.mp3');
-const win = new Audio('../sound/win.mp3');
-const hit = new Audio('../sound/hit.mp3');
-const backgroundMusic = new Audio('../sound/background.mp3');
+const miss = new Audio('../Battleship_Project/sound/Miss.mp3');
+const shipSound = new Audio('../Battleship_Project/sound/shipSound.mp3');
+const confirmSound = new Audio('../Battleship_Project/sound/confirm.mp3');
+const invalid = new Audio('../Battleship_Project/sound/Invalid.mp3');
+const lose = new Audio('../Battleship_Project/sound/Lose.mp3');
+const win = new Audio('../Battleship_Project/sound/Win.mp3');
+const hit = new Audio('../Battleship_Project/sound/Hit.mp3');
+const backgroundMusic = new Audio('../Battleship_Project/sound/background.mp3');
 
 hit.volume = 0.70;
 win.volume = 0.70;
