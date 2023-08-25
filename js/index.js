@@ -307,7 +307,7 @@ function handleHumanAttack(event) {
   renderComputerBoard();
   checkSunk(computerShips, computerBoard);
   checkWinner(computerShips);
-  setTimeout(handleComputerAttack, 2000);
+  setTimeout(handleComputerAttack, 1200);
   turn = 'computer';
 };
 
